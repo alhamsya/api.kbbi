@@ -16,7 +16,7 @@ def main_info():
         "local_time": get_now('ID'),
         "local_date": get_now('ID', True)
     }
-    return resp_success(result)
+    return resp_success(result, "Request method POST and param json:<word>")
 
 
 @main_bp.route("/", methods=['POST'])
@@ -53,4 +53,4 @@ def app_info():
         "meaning": all_meaning_word
     }
 
-    return resp_success(result, "Request method POST and param json:<word>")
+    return resp_success(result)
