@@ -1,4 +1,6 @@
 import requests
+import re
+
 from bs4 import BeautifulSoup
 from flask import Blueprint, request
 
@@ -28,6 +30,9 @@ def app_info():
     word_req = post_data.get("word")
     if not word_req:
         return resp_err("Input not valid", 2)
+
+    word_req.strip()
+    word_req= re.sub('[^A-Za-z0-9]+', '', word_req)
 
     url_req = "https://kbbi.kemdikbud.go.id/entri/%s" % (word_req)
     resp = requests.get(url_req)
