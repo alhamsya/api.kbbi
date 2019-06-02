@@ -1,1 +1,1 @@
-# Zulu.id
+# https://kbbi.kemdikbud.go.id
