@@ -1,0 +1,25 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Pyenv python configuration file
+.python-version
+
+# Virtual environments
+venv*
+
+# Pytest and coverage
+.cache
+.coverage
+
+# Visual code
+.vscode/
+
+# Pycharm
+.idea/
+.idea/*
