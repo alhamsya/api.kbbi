@@ -53,4 +53,4 @@ def app_info():
         "meaning": all_meaning_word
     }
 
-    return resp_success(result)
+    return resp_success(result, "Request method POST and param json:<word>")
