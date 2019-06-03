@@ -5,12 +5,14 @@ from bs4 import BeautifulSoup
 from flask import Blueprint, request
 
 from core.hooks import resp_err, resp_success
+from core.decorators import is_connection
 from core.utils import get_now
 
 main_bp = Blueprint("main", __name__)
 
 
 @main_bp.route("/", methods=['GET'])
+@is_connection
 def main_info():
     result = {
         "local_time": get_now('ID'),
@@ -20,6 +22,7 @@ def main_info():
 
 
 @main_bp.route("/", methods=['POST'])
+@is_connection
 def app_info():
     # Validation request
     post_data = request.get_json()
