@@ -38,8 +38,11 @@ def app_info():
     word_req= re.sub('[^A-Za-z0-9]+', '', word_req)
 
     url_req = "https://kbbi.kemdikbud.go.id/entri/%s" % (word_req)
-    resp = requests.get(url_req)
-    soup = BeautifulSoup(resp.content, "html.parser")
+    try:
+        resp = requests.get(url_req)
+        soup = BeautifulSoup(resp.content, "html.parser")
+    except Exception :
+        return resp_err("Website KBBI not response", 3, 500)
 
     data_text = soup.find(text=" Entri tidak ditemukan.")
     if data_text:
