@@ -1,4 +1,4 @@
-from core.helpers.helper_api import api
+from core.helpers.base import api
 
 HOST = lambda: 'http://api.zulu.id/v1/get-episode'
 HEADERS = {
