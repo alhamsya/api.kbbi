@@ -40,7 +40,11 @@ def app_info():
 
     data_text = soup.find(text=" Entri tidak ditemukan.")
     if data_text:
-        return resp_err("Word not found", 3)
+        result = {
+            "sts_word": False,
+            "word": word_req
+        }
+        return resp_success(result, "Word is not found")
 
     all_resp = soup.find_all('ul', class_="adjusted-par")
     all_meaning_word = []
@@ -49,8 +53,9 @@ def app_info():
         all_meaning_word.append(meaning)
 
     result = {
+        "sts_word": True,
         "word": word_req,
         "meaning": all_meaning_word
     }
 
-    return resp_success(result)
+    return resp_success(result, "Word found in the KBBI")
