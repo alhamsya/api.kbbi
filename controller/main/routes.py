@@ -39,18 +39,22 @@ def app_info():
 
     url_req = "https://kbbi.kemdikbud.go.id/entri/%s" % (word_req)
     try:
-        resp = requests.get(url_req)
+        resp = requests.get(url_req, timeout=5)
         soup = BeautifulSoup(resp.content, "html.parser")
     except Exception :
         return resp_err("Website KBBI not response", 3, 500)
 
     data_text = soup.find(text=" Entri tidak ditemukan.")
-    if data_text:
+    render_finish = soup.findAll("span", {"class": "glyphicon glyphicon-info-sign text-info"})
+    if data_text and render_finish:
         result = {
             "sts_word": False,
             "word": word_req
         }
         return resp_success(result, "Word is not found")
+
+    if not render_finish:
+        return resp_err("Please try again", 4, 444)
 
     all_resp = soup.find_all('ul', class_="adjusted-par")
     all_meaning_word = []
