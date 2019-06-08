@@ -1,5 +1,6 @@
 import requests
 import re
+import time
 
 from bs4 import BeautifulSoup
 from flask import Blueprint, request
@@ -24,6 +25,8 @@ def main_info():
 @main_bp.route("/", methods=['POST'])
 @is_connection
 def app_info():
+    # Initial var
+    sleep = 0
     # Validation request
     post_data = request.get_json()
     if not post_data:
@@ -38,23 +41,27 @@ def app_info():
     word_req= re.sub('[^A-Za-z0-9]+', '', word_req)
 
     url_req = "https://kbbi.kemdikbud.go.id/entri/%s" % (word_req)
-    try:
-        resp = requests.get(url_req, timeout=5)
-        soup = BeautifulSoup(resp.content, "html.parser")
-    except Exception :
-        return resp_err("Website KBBI not response", 3, 500)
+    while True:
+        try:
+            resp = requests.get(url_req, timeout=5)
+            time.sleep(sleep)
+            soup = BeautifulSoup(resp.content, "html.parser")
+        except Exception :
+            return resp_err("Website KBBI not response", 3, 500)
 
-    data_text = soup.find(text=" Entri tidak ditemukan.")
-    render_finish = soup.findAll("span", {"class": "glyphicon glyphicon-info-sign text-info"})
-    if data_text and render_finish:
-        result = {
-            "sts_word": False,
-            "word": word_req
-        }
-        return resp_success(result, "Word is not found")
+        data_text = soup.find(text=" Entri tidak ditemukan.")
+        render_finish = soup.findAll("span", {"class": "text-info"})
+        if data_text and render_finish:
+            result = {
+                "sts_word": False,
+                "word": word_req
+            }
+            return resp_success(result, "Word is not found")
 
-    if not render_finish:
-        return resp_err("Please try again", 4, 444)
+        if not data_text and render_finish:
+            break
+
+        sleep += 0.25
 
     all_resp = soup.find_all('ul', class_="adjusted-par")
     all_meaning_word = []
