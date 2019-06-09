@@ -38,19 +38,34 @@ def app_info():
         return resp_err("Input not valid", 2)
 
     word_req.strip()
-    word_req= re.sub('[^A-Za-z0-9]+', '', word_req)
+    word_req = re.sub('[^A-Za-z0-9]+', '', word_req)
+
+    # Start auto login
+    s = requests.session()
+    resp_login = s.get('https://kbbi.kemdikbud.go.id/Account/Login')
+    sou = BeautifulSoup(resp_login.content, "html.parser")
+    csrf = sou.find('input', {"name": "__RequestVerificationToken"})
+    token = csrf.attrs['value']
+
+    auth = {
+        'Posel': 'data.alham@gmail.com',
+        'KataSandi': '123456789',
+        '__RequestVerificationToken': token
+    }
+    s.post('https://kbbi.kemdikbud.go.id/Account/Login', data=auth)
+    # End auto login
 
     url_req = "https://kbbi.kemdikbud.go.id/entri/%s" % (word_req)
     while True:
         try:
-            resp = requests.get(url_req, timeout=5)
+            resp = s.get(url_req, timeout=5)
             time.sleep(sleep)
             soup = BeautifulSoup(resp.content, "html.parser")
         except Exception :
             return resp_err("Website KBBI not response", 3, 500)
 
         data_text = soup.find(text=" Entri tidak ditemukan.")
-        render_finish = soup.findAll("span", {"class": "text-info"})
+        render_finish = soup.findAll("span", {"class": "glyphicon-info-sign"})
         if data_text and render_finish:
             result = {
                 "sts_word": False,
