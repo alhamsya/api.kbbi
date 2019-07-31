@@ -1,0 +1,1 @@
+docker run --detach -p 3000:3000 api.kbbi.kemdikbud.go.id
