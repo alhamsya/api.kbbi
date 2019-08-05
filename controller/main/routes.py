@@ -106,7 +106,7 @@ def app_info():
 
         limit_request = soup.find(text=" Batas Sehari")
         if limit_request:
-            logger.info('Limit account - %s' % (auth[num_auth].get("Posel")))
+            logger.warning('Limit account - %s' % (auth[num_auth].get("Posel")))
             num_auth += 1
             continue
 
