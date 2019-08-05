@@ -1,6 +1,7 @@
 import requests
 import re
 import time
+import sys
 
 from bs4 import BeautifulSoup
 from flask import Blueprint, request
@@ -105,6 +106,7 @@ def app_info():
         limit_request = soup.find(text=" Batas Sehari")
         if limit_request:
             print('Limit account - %s' % (auth[num_auth].get("Posel")))
+            sys.stdout.flush()
             num_auth += 1
             continue
 
