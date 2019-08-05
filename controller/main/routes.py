@@ -98,7 +98,7 @@ def app_info():
             url_req = "https://kbbi.kemdikbud.go.id/entri/%s" % (word_req)
 
             resp = s.get(url_req, timeout=5)
-            time.sleep(sleep)
+            # time.sleep(sleep)
             soup = BeautifulSoup(resp.content, "html.parser")
         except Exception :
             return resp_err("Website KBBI not response", 3, 500)
@@ -122,7 +122,7 @@ def app_info():
         if not data_text and render_finish:
             break
 
-        sleep += 0.25
+        # sleep += 0.25
 
     all_resp = soup.find_all('ul', class_="adjusted-par")
     all_meaning_word = []
