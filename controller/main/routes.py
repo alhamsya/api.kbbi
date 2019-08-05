@@ -9,6 +9,7 @@ from flask import Blueprint, request
 from core.hooks import resp_err, resp_success
 from core.decorators import is_connection
 from core.utils import get_now
+from controller.main.auth import auth_login
 
 main_bp = Blueprint("main", __name__)
 
@@ -16,9 +17,11 @@ main_bp = Blueprint("main", __name__)
 @main_bp.route("/", methods=['GET'])
 @is_connection
 def main_info():
+    ip = requests.get('https://api.ipify.org').text
     result = {
         "local_time": get_now('ID'),
-        "local_date": get_now('ID', True)
+        "local_date": get_now('ID', True),
+        "host": ip
     }
     return resp_success(result, "Request method POST and param json:<word>")
 
@@ -38,7 +41,7 @@ def app_info():
     if not word_req:
         return resp_err("Input not valid", 2)
 
-    word_req.strip()
+    # word_req.strip()
     word_req = re.sub('[^A-Za-z0-9-]+', '', word_req)
 
     # Start auto login
@@ -48,51 +51,19 @@ def app_info():
     csrf = sou.find('input', {"name": "__RequestVerificationToken"})
     token = csrf.attrs['value']
 
-    {
-
-
-
-    }
-
-    auth = [
-        {
-            'Posel': 'data.alham@gmail.com',
-            'KataSandi': '123456789',
-            '__RequestVerificationToken': token
-        },
-        {
-            'Posel': 'alhamsya@gmail.com',
-            'KataSandi': '123456789',
-            '__RequestVerificationToken': token
-        },
-        {
-            'Posel': 'bot.alham1@gmail.com',
-            'KataSandi': '123456789',
-            '__RequestVerificationToken': token
-        },
-        {
-            'Posel': 'bot.alham2@gmail.com',
-            'KataSandi': '123456789',
-            '__RequestVerificationToken': token
-        },
-        {
-            'Posel': 'bot.alham3@gmail.com',
-            'KataSandi': '123456789',
-            '__RequestVerificationToken': token
-        }
-    ]
-
     num_auth = 0
     while True:
-        if len(auth) - 1 == num_auth:
+        if len(auth_login) - 1 == num_auth:
             result = {
                 "sts_word": False,
                 "word": word_req
             }
             return resp_success(result, "All account limit")
 
+        auth = auth_login[num_auth]
+        auth.update({"__RequestVerificationToken": token})
         try:
-            s.post('https://kbbi.kemdikbud.go.id/Account/Login', data=auth[num_auth])
+            s.post('https://kbbi.kemdikbud.go.id/Account/Login', data=auth)
             # End auto login
 
             url_req = "https://kbbi.kemdikbud.go.id/entri/%s" % (word_req)
@@ -105,7 +76,7 @@ def app_info():
 
         limit_request = soup.find(text=" Batas Sehari")
         if limit_request:
-            print('Limit account - %s' % (auth[num_auth].get("Posel")))
+            print('Limit account - %s' % (auth.get("Posel")))
             sys.stdout.flush()
             num_auth += 1
             continue
