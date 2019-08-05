@@ -1,6 +1,7 @@
 import requests
 import re
 import time
+import logging
 
 from bs4 import BeautifulSoup
 from flask import Blueprint, request
@@ -11,6 +12,7 @@ from core.utils import get_now
 
 main_bp = Blueprint("main", __name__)
 
+logger = logging.getLogger()
 
 @main_bp.route("/", methods=['GET'])
 @is_connection
@@ -104,7 +106,7 @@ def app_info():
 
         limit_request = soup.find(text=" Batas Sehari")
         if limit_request:
-            print("Limit account - %s" % (auth[num_auth].get("Posel")))
+            logger.info('Limit account - %s' % (auth[num_auth].get("Posel")))
             num_auth += 1
             continue
 
