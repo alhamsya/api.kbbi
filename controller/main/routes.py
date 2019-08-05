@@ -52,7 +52,9 @@ def app_info():
     token = csrf.attrs['value']
 
     num_auth = 0
+    iteration = 0
     while True:
+        iteration += 1
         if len(auth_login) - 1 == num_auth:
             result = {
                 "sts_word": False,
@@ -71,7 +73,9 @@ def app_info():
             resp = s.get(url_req, timeout=5)
             # time.sleep(sleep)
             soup = BeautifulSoup(resp.content, "html.parser")
-        except Exception :
+        except Exception as e:
+            print("err: %s | %s | %s" % (e, iteration, word_req))
+            sys.stdout.flush()
             return resp_err("Website KBBI not response", 3, 500)
 
         limit_request = soup.find(text=" Batas Sehari")
