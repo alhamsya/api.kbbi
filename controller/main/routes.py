@@ -47,22 +47,66 @@ def app_info():
     csrf = sou.find('input', {"name": "__RequestVerificationToken"})
     token = csrf.attrs['value']
 
-    auth = {
-        'Posel': 'info.alham@gmail.com',
-        'KataSandi': '123456789',
-        '__RequestVerificationToken': token
-    }
-    s.post('https://kbbi.kemdikbud.go.id/Account/Login', data=auth)
-    # End auto login
+    {
 
-    url_req = "https://kbbi.kemdikbud.go.id/entri/%s" % (word_req)
+
+
+    }
+
+    auth = [
+        {
+            'Posel': 'data.alham@gmail.com',
+            'KataSandi': '123456789',
+            '__RequestVerificationToken': token
+        },
+        {
+            'Posel': 'alhamsya@gmail.com',
+            'KataSandi': '123456789',
+            '__RequestVerificationToken': token
+        },
+        {
+            'Posel': 'bot.alham1@gmail.com',
+            'KataSandi': '123456789',
+            '__RequestVerificationToken': token
+        },
+        {
+            'Posel': 'bot.alham2@gmail.com',
+            'KataSandi': '123456789',
+            '__RequestVerificationToken': token
+        },
+        {
+            'Posel': 'bot.alham3@gmail.com',
+            'KataSandi': '123456789',
+            '__RequestVerificationToken': token
+        }
+    ]
+
+    num_auth = 0
     while True:
+        if len(auth) - 1 == num_auth:
+            result = {
+                "sts_word": False,
+                "word": word_req
+            }
+            return resp_success(result, "All account limit")
+
         try:
+            s.post('https://kbbi.kemdikbud.go.id/Account/Login', data=auth[num_auth])
+            # End auto login
+
+            url_req = "https://kbbi.kemdikbud.go.id/entri/%s" % (word_req)
+
             resp = s.get(url_req, timeout=5)
             time.sleep(sleep)
             soup = BeautifulSoup(resp.content, "html.parser")
         except Exception :
             return resp_err("Website KBBI not response", 3, 500)
+
+        limit_request = soup.find(text=" Batas Sehari")
+        if limit_request:
+            print("Limit account - %s" % (auth[num_auth].get("Posel")))
+            num_auth += 1
+            continue
 
         data_text = soup.find(text=" Entri tidak ditemukan.")
         render_finish = soup.findAll("span", {"class": "glyphicon-info-sign"})
