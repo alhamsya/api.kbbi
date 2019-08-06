@@ -76,13 +76,15 @@ def app_info():
     iteration = 0
     while True:
         iteration += 1
+        email = auth_email()[num_auth]
+
         if len(auth_email()) - 1 == num_auth:
             result = {
                 "sts_word": False,
                 "word": word_req
             }
-            return resp_success(result, "All account limit")
-        email = auth_email()[num_auth]
+            return resp_err(result, "All account limit")
+
 
         auth.update({"Posel": email})
         auth.update({"KataSandi": password})
@@ -122,7 +124,7 @@ def app_info():
                 "sts_word": False,
                 "word": word_req
             }
-            return resp_success(result, "Word is not found")
+            return resp_err(result, "Word is not found")
 
         if not data_text and render_finish:
             break
