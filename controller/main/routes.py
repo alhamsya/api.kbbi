@@ -9,9 +9,25 @@ from flask import Blueprint, request
 from core.hooks import resp_err, resp_success
 from core.decorators import is_connection
 from core.utils import get_now
-from controller.main.auth import auth_login
 
 main_bp = Blueprint("main", __name__)
+
+def auth_email():
+    auth_login = [
+        'data.alham@gmail.com',
+        'alhamsya@gmail.com',
+        'finance.alham@gmail.com',
+        'game.alham@gmail.com',
+        'bot.alham1@gmail.com',
+        'bot.alham2@gmail.com',
+        'bot.alham3@gmail.com',
+        'bot.alham1@hotmail.com',
+        'bot.alham2@hotmail.com',
+        'bot.alham3@hotmail.com',
+        'bot.alham4@hotmail.com',
+    ]
+
+    return auth_login
 
 
 @main_bp.route("/", methods=['GET'])
@@ -31,6 +47,7 @@ def main_info():
 def app_info():
     # Initial var
     sleep = 0
+    auth = dict()
     # Validation request
     post_data = request.get_json()
     if not post_data:
@@ -50,20 +67,24 @@ def app_info():
     sou = BeautifulSoup(resp_login.content, "html.parser")
     csrf = sou.find('input', {"name": "__RequestVerificationToken"})
     token = csrf.attrs['value']
+    password = "123456789"
 
     num_auth = 0
     iteration = 0
     while True:
         iteration += 1
-        if len(auth_login) - 1 == num_auth:
+        if len(auth_email()) - 1 == num_auth:
             result = {
                 "sts_word": False,
                 "word": word_req
             }
             return resp_success(result, "All account limit")
+        email = auth_email()[num_auth]
 
-        auth = auth_login[num_auth]
+        auth.update({"Posel": email})
+        auth.update({"KataSandi": password})
         auth.update({"__RequestVerificationToken": token})
+
         try:
             s.post('https://kbbi.kemdikbud.go.id/Account/Login', data=auth)
             # End auto login
@@ -80,7 +101,7 @@ def app_info():
 
         limit_request = soup.find(text=" Batas Sehari")
         if limit_request:
-            print('Limit account - %s' % (auth.get("Posel")))
+            print('Limit account - %s' % email)
             sys.stdout.flush()
             num_auth += 1
             continue

@@ -6,7 +6,7 @@ from sqlalchemy.orm import relationship, backref
 
 db = SQLAlchemy(session_options={"autoflush": False})
 
-PREFIX_DB = 'zulu_'
+PREFIX_DB = 'kbbi_'
 
 
 class Base(db.Model):
@@ -25,15 +25,11 @@ class CreateAt(db.Model):
     create_at = Column(DateTime, nullable=False, default=datetime.datetime.now)
 
 
-class Scrap(Base, CreateAt, UpdateAt):
-    __tablename__ = PREFIX_DB + 'scrap'
+class Auth(Base, CreateAt):
+    __tablename__ = PREFIX_DB + 'auth'
     __table_args__ = (
-        Index("idx_ep_pr", "episode", "program"),
-        Index("idx_ep_cr", "episode", "create_at", unique=True),
+        Index("email", unique=True),
     )
 
-    episode = Column(Integer, nullable=False, default='0', server_default='0')
-    program = Column(String(255), nullable=False)
-    url_img = Column(Text, nullable=True)
-    url_video = Column(Text, nullable=True)
-    title = Column(String(255), nullable=False)
+    status = Column(Integer, nullable=False, default='0', server_default='0')
+    email = Column(String(255), nullable=False)
