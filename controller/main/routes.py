@@ -106,6 +106,12 @@ def app_info():
             num_auth += 1
             continue
 
+        error_request = soup.find(text="Terjadi Kesalahan")
+        if error_request:
+            print('Error request word : %s | %s' % (word_req, iteration))
+            sys.stdout.flush()
+            continue
+
         data_text = soup.find(text=" Entri tidak ditemukan.")
         render_finish = soup.findAll("span", {"class": "glyphicon-info-sign"})
         if data_text and render_finish:
