@@ -79,15 +79,11 @@ def app_info():
         email = auth_email()[num_auth]
 
         if len(auth_email()) - 1 == num_auth:
-            result = {
-                "sts_word": False,
-                "word": word_req
-            }
             print('=' * 50)
             print('All account limit')
             print('=' * 50)
             sys.stdout.flush()
-            return resp_err(result, "All account limit")
+            return resp_err("All account limit", 3)
 
 
         auth.update({"Posel": email})
@@ -106,7 +102,7 @@ def app_info():
         except Exception as e:
             print("err: %s | %s | %s" % (e, iteration, word_req))
             sys.stdout.flush()
-            return resp_err("Website KBBI not response", 3, 500)
+            return resp_err("Website KBBI not response", 4, 500)
 
         limit_request = soup.find(text=" Batas Sehari")
         if limit_request:
@@ -128,7 +124,7 @@ def app_info():
                 "sts_word": False,
                 "word": word_req
             }
-            return resp_err(result, "Word is not found")
+            return resp_success(result, "Word is not found")
 
         if not data_text and render_finish:
             break
