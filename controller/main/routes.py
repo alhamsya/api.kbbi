@@ -83,6 +83,10 @@ def app_info():
                 "sts_word": False,
                 "word": word_req
             }
+            print('=' * 50)
+            print('All account limit')
+            print('=' * 50)
+            sys.stdout.flush()
             return resp_err(result, "All account limit")
 
 
