@@ -25,6 +25,9 @@ def auth_email():
         'bot.alham2@hotmail.com',
         'bot.alham3@hotmail.com',
         'bot.alham4@hotmail.com',
+        'bot.alham5@hotmail.com',
+        'bot.alham6@hotmail.com',
+        'bot.alham7@hotmail.com',
     ]
 
     return auth_login
