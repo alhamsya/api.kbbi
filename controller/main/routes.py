@@ -14,12 +14,12 @@ main_bp = Blueprint("main", __name__)
 
 def auth_email():
     auth_login = [
-        'data.alham@gmail.com',
-        'alhamsya@gmail.com',
-        'finance.alham@gmail.com',
-        'game.alham@gmail.com',
-        'bot.alham1@gmail.com',
-        'bot.alham2@gmail.com',
+        # 'data.alham@gmail.com',
+        # 'alhamsya@gmail.com',
+        # 'finance.alham@gmail.com',
+        # 'game.alham@gmail.com',
+        # 'bot.alham1@gmail.com',
+        # 'bot.alham2@gmail.com',
         'bot.alham3@gmail.com',
         'bot.alham1@hotmail.com',
         'bot.alham2@hotmail.com',
