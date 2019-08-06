@@ -2,6 +2,7 @@ import requests
 import re
 import time
 import sys
+import random
 
 from bs4 import BeautifulSoup
 from flask import Blueprint, request
@@ -14,20 +15,30 @@ main_bp = Blueprint("main", __name__)
 
 def auth_email():
     auth_login = [
-        'data.alham@gmail.com',
-        'alhamsya@gmail.com',
-        'finance.alham@gmail.com',
-        'game.alham@gmail.com',
-        'bot.alham1@gmail.com',
-        'bot.alham2@gmail.com',
-        'bot.alham3@gmail.com',
-        'bot.alham1@hotmail.com',
-        'bot.alham2@hotmail.com',
-        'bot.alham3@hotmail.com',
-        'bot.alham4@hotmail.com',
-        'bot.alham5@hotmail.com',
-        'bot.alham6@hotmail.com',
+        # 'data.alham@gmail.com',
+        # 'alhamsya@gmail.com',
+        # 'finance.alham@gmail.com',
+        # 'game.alham@gmail.com',
+        # 'bot.alham1@gmail.com',
+        # 'bot.alham2@gmail.com',
+        # 'bot.alham3@gmail.com',
+        # 'bot.alham1@hotmail.com',
+        # 'bot.alham2@hotmail.com',
+        # 'bot.alham3@hotmail.com',
+        # 'bot.alham4@hotmail.com',
+        # 'bot.alham5@hotmail.com',
+        # 'bot.alham6@hotmail.com',
         'bot.alham7@hotmail.com',
+        'bot.alham8@hotmail.com',
+        'bot.alham9@hotmail.com',
+        'bot.alham10@hotmail.com',
+        'bot.alham11@hotmail.com',
+        'bot.alham12@hotmail.com',
+        'bot.alham13@hotmail.com',
+        'bot.alham14@hotmail.com',
+        'bot.alham15@hotmail.com',
+        'aysmahla@gmail.com',
+        'indiastutiksri@gmail.com'
     ]
 
     return auth_login
@@ -76,15 +87,15 @@ def app_info():
     iteration = 0
     while True:
         iteration += 1
-        email = auth_email()[num_auth]
+        rant_int = random.randrange(len(auth_email()))
+        email = auth_email()[rant_int]
 
-        if len(auth_email()) - 1 == num_auth:
+        if len(auth_email()) * 2 == num_auth:
             print('=' * 50)
             print('All account limit')
             print('=' * 50)
             sys.stdout.flush()
             return resp_err("All account limit", 3)
-
 
         auth.update({"Posel": email})
         auth.update({"KataSandi": password})
@@ -115,6 +126,7 @@ def app_info():
         if error_request:
             print('Error request word : %s | %s' % (word_req, iteration))
             sys.stdout.flush()
+            num_auth += 1
             continue
 
         data_text = soup.find(text=" Entri tidak ditemukan.")
