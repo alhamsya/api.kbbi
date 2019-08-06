@@ -26,5 +26,9 @@ auth_login = [
         {
             'Posel': 'bot.alham3@gmail.com',
             'KataSandi': '123456789',
+        },
+        {
+            'Posel': 'bot.alham4@yahoo.com',
+            'KataSandi': '123456789',
         }
     ]
