@@ -83,14 +83,14 @@ def app_info():
     # word_req.strip()
     word_req = re.sub('[^A-Za-z0-9-]+', '', word_req)
 
-    # Start auto login
-    s = requests.session()
-    resp_login = s.get('https://kbbi.kemdikbud.go.id/Account/Login')
-    sou = BeautifulSoup(resp_login.content, "html.parser")
-    csrf = sou.find('input', {"name": "__RequestVerificationToken"})
-    token = csrf.attrs['value']
-
     while True:
+        # Start auto login
+        s = requests.session()
+        resp_login = s.get('https://kbbi.kemdikbud.go.id/Account/Login')
+        sou = BeautifulSoup(resp_login.content, "html.parser")
+        csrf = sou.find('input', {"name": "__RequestVerificationToken"})
+        token = csrf.attrs['value']
+
         iteration += 1
         email = auth_email()[num_auth]
 
