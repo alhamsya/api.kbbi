@@ -37,6 +37,11 @@ def auth_email():
         'bot.alham13@hotmail.com',
         'bot.alham14@hotmail.com',
         'bot.alham15@hotmail.com',
+        'bot.alham16@hotmail.com',
+        'bot.alham17@hotmail.com',
+        'bot.alham18@hotmail.com',
+        'bot.alham19@hotmail.com',
+        'bot.alham20@hotmail.com',
         'aysmahla@gmail.com',
         'indiastutiksri@gmail.com'
     ]
@@ -45,7 +50,7 @@ def auth_email():
 
 
 @main_bp.route("/", methods=['GET'])
-@is_connection
+# @is_connection
 def main_info():
     ip = requests.get('https://api.ipify.org').text
     result = {
@@ -57,7 +62,7 @@ def main_info():
 
 
 @main_bp.route("/", methods=['POST'])
-@is_connection
+# @is_connection
 def app_info():
     # Initial var
     sleep = 0
@@ -89,7 +94,7 @@ def app_info():
         iteration += 1
         email = auth_email()[num_auth]
 
-        if len(auth_email()) == num_auth:
+        if len(auth_email()) - 1 == num_auth:
             print('=' * 50)
             print('All account limit')
             print('=' * 50)
@@ -107,7 +112,7 @@ def app_info():
             url_req = "https://kbbi.kemdikbud.go.id/entri/%s" % (word_req)
 
             resp = s.get(url_req, timeout=5)
-            # time.sleep(sleep)
+            time.sleep(sleep)
             soup = BeautifulSoup(resp.content, "html.parser")
         except Exception as e:
             print("err: %s | %s | %s" % (e, iteration, word_req))
@@ -140,7 +145,7 @@ def app_info():
         if not data_text and render_finish:
             break
 
-        # sleep += 0.25
+        sleep += 0.25
 
     all_resp = soup.find_all('ul', class_="adjusted-par")
     all_meaning_word = []
