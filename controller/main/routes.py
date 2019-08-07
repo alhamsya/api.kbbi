@@ -42,6 +42,11 @@ def auth_email():
         'bot.alham18@hotmail.com',
         'bot.alham19@hotmail.com',
         'bot.alham20@hotmail.com',
+        'bot.alham21@hotmail.com',
+        'bot.alham22@hotmail.com',
+        'bot.alham23@hotmail.com',
+        'bot.alham24@hotmail.com',
+        'bot.alham25@hotmail.com',
         'aysmahla@gmail.com',
         'indiastutiksri@gmail.com'
     ]
@@ -83,16 +88,18 @@ def app_info():
     # word_req.strip()
     word_req = re.sub('[^A-Za-z0-9-]+', '', word_req)
 
-    # Start auto login
-    s = requests.session()
-    resp_login = s.get('https://kbbi.kemdikbud.go.id/Account/Login')
-    sou = BeautifulSoup(resp_login.content, "html.parser")
-    csrf = sou.find('input', {"name": "__RequestVerificationToken"})
-    token = csrf.attrs['value']
+
 
     while True:
         iteration += 1
         email = auth_email()[num_auth]
+
+        # Start auto login
+        s = requests.session()
+        resp_login = s.get('https://kbbi.kemdikbud.go.id/Account/Login')
+        sou = BeautifulSoup(resp_login.content, "html.parser")
+        csrf = sou.find('input', {"name": "__RequestVerificationToken"})
+        token = csrf.attrs['value']
 
         if len(auth_email()) - 1 == num_auth:
             print('=' * 50)
