@@ -28,15 +28,15 @@ def auth_email():
         # 'bot.alham4@hotmail.com',
         # 'bot.alham5@hotmail.com',
         # 'bot.alham6@hotmail.com',
-        'bot.alham7@hotmail.com',
-        'bot.alham8@hotmail.com',
-        'bot.alham9@hotmail.com',
-        'bot.alham10@hotmail.com',
-        'bot.alham11@hotmail.com',
-        'bot.alham12@hotmail.com',
-        'bot.alham13@hotmail.com',
-        'bot.alham14@hotmail.com',
-        'bot.alham15@hotmail.com',
+        # 'bot.alham7@hotmail.com',
+        # 'bot.alham8@hotmail.com',
+        # 'bot.alham9@hotmail.com',
+        # 'bot.alham10@hotmail.com',
+        # 'bot.alham11@hotmail.com',
+        # 'bot.alham12@hotmail.com',
+        # 'bot.alham13@hotmail.com',
+        # 'bot.alham14@hotmail.com',
+        # 'bot.alham15@hotmail.com',
         'bot.alham16@hotmail.com',
         'bot.alham17@hotmail.com',
         'bot.alham18@hotmail.com',
@@ -65,6 +65,9 @@ def main_info():
 # @is_connection
 def app_info():
     # Initial var
+    password = "123456789"
+    num_auth = 0
+    iteration = 0
     sleep = 0
     auth = dict()
     # Validation request
@@ -80,17 +83,14 @@ def app_info():
     # word_req.strip()
     word_req = re.sub('[^A-Za-z0-9-]+', '', word_req)
 
-    # Start auto login
-    s = requests.session()
-    resp_login = s.get('https://kbbi.kemdikbud.go.id/Account/Login')
-    sou = BeautifulSoup(resp_login.content, "html.parser")
-    csrf = sou.find('input', {"name": "__RequestVerificationToken"})
-    token = csrf.attrs['value']
-    password = "123456789"
-
-    num_auth = 0
-    iteration = 0
     while True:
+        # Start auto login
+        s = requests.session()
+        resp_login = s.get('https://kbbi.kemdikbud.go.id/Account/Login')
+        sou = BeautifulSoup(resp_login.content, "html.parser")
+        csrf = sou.find('input', {"name": "__RequestVerificationToken"})
+        token = csrf.attrs['value']
+
         iteration += 1
         email = auth_email()[num_auth]
 
