@@ -87,10 +87,9 @@ def app_info():
     iteration = 0
     while True:
         iteration += 1
-        rant_int = random.randrange(len(auth_email()))
-        email = auth_email()[rant_int]
+        email = auth_email()[num_auth]
 
-        if len(auth_email()) * 2 == num_auth:
+        if len(auth_email()) == num_auth:
             print('=' * 50)
             print('All account limit')
             print('=' * 50)
