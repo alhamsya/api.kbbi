@@ -15,30 +15,30 @@ main_bp = Blueprint("main", __name__)
 
 def auth_email():
     auth_login = [
-        # 'data.alham@gmail.com',
-        # 'alhamsya@gmail.com',
-        # 'finance.alham@gmail.com',
-        # 'game.alham@gmail.com',
-        # 'bot.alham1@gmail.com',
-        # 'bot.alham2@gmail.com',
-        # 'bot.alham3@gmail.com',
-        # 'bot.alham1@hotmail.com',
-        # 'bot.alham2@hotmail.com',
-        # 'bot.alham3@hotmail.com',
-        # 'bot.alham4@hotmail.com',
-        # 'bot.alham5@hotmail.com',
-        # 'bot.alham6@hotmail.com',
-        # 'bot.alham7@hotmail.com',
-        # 'bot.alham8@hotmail.com',
-        # 'bot.alham9@hotmail.com',
-        # 'bot.alham10@hotmail.com',
-        # 'bot.alham11@hotmail.com',
-        # 'bot.alham12@hotmail.com',
-        # 'bot.alham13@hotmail.com',
-        # 'bot.alham14@hotmail.com',
-        # 'bot.alham15@hotmail.com',
-        # 'bot.alham16@hotmail.com',
-        # 'bot.alham17@hotmail.com',
+        'data.alham@gmail.com',
+        'alhamsya@gmail.com',
+        'finance.alham@gmail.com',
+        'game.alham@gmail.com',
+        'bot.alham1@gmail.com',
+        'bot.alham2@gmail.com',
+        'bot.alham3@gmail.com',
+        'bot.alham1@hotmail.com',
+        'bot.alham2@hotmail.com',
+        'bot.alham3@hotmail.com',
+        'bot.alham4@hotmail.com',
+        'bot.alham5@hotmail.com',
+        'bot.alham6@hotmail.com',
+        'bot.alham7@hotmail.com',
+        'bot.alham8@hotmail.com',
+        'bot.alham9@hotmail.com',
+        'bot.alham10@hotmail.com',
+        'bot.alham11@hotmail.com',
+        'bot.alham12@hotmail.com',
+        'bot.alham13@hotmail.com',
+        'bot.alham14@hotmail.com',
+        'bot.alham15@hotmail.com',
+        'bot.alham16@hotmail.com',
+        'bot.alham17@hotmail.com',
         'bot.alham18@hotmail.com',
         'bot.alham19@hotmail.com',
         'bot.alham20@hotmail.com',
@@ -55,7 +55,7 @@ def auth_email():
 
 
 @main_bp.route("/", methods=['GET'])
-# @is_connection
+@is_connection
 def main_info():
     ip = requests.get('https://api.ipify.org').text
     result = {
