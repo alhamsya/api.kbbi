@@ -31,12 +31,12 @@ def auth_email():
         # 'bot.alham7@hotmail.com',
         # 'bot.alham8@hotmail.com',
         # 'bot.alham9@hotmail.com',
-        'bot.alham10@hotmail.com',
-        'bot.alham11@hotmail.com',
-        'bot.alham12@hotmail.com',
-        'bot.alham13@hotmail.com',
-        'bot.alham14@hotmail.com',
-        'bot.alham15@hotmail.com',
+        # 'bot.alham10@hotmail.com',
+        # 'bot.alham11@hotmail.com',
+        # 'bot.alham12@hotmail.com',
+        # 'bot.alham13@hotmail.com',
+        # 'bot.alham14@hotmail.com',
+        # 'bot.alham15@hotmail.com',
         'bot.alham16@hotmail.com',
         'bot.alham17@hotmail.com',
         'bot.alham18@hotmail.com',
@@ -48,7 +48,6 @@ def auth_email():
         'bot.alham24@hotmail.com',
         'bot.alham25@hotmail.com',
         'aysmahla@gmail.com',
-        'indiastutiksri@gmail.com'
     ]
 
     return auth_login
@@ -88,8 +87,6 @@ def app_info():
     # word_req.strip()
     word_req = re.sub('[^A-Za-z0-9-]+', '', word_req)
 
-
-
     while True:
         iteration += 1
         email = auth_email()[num_auth]
@@ -106,7 +103,7 @@ def app_info():
             print('All account limit')
             print('=' * 50)
             sys.stdout.flush()
-            return resp_err("All account limit", 3)
+            return resp_err("All account limit", 3, 500)
 
         auth.update({"Posel": email})
         auth.update({"KataSandi": password})
@@ -118,7 +115,7 @@ def app_info():
 
             url_req = "https://kbbi.kemdikbud.go.id/entri/%s" % (word_req)
 
-            resp = s.get(url_req, timeout=5)
+            resp = s.get(url_req, timeout=50)
             time.sleep(sleep)
             soup = BeautifulSoup(resp.content, "html.parser")
         except Exception as e:

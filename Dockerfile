@@ -3,5 +3,5 @@ ADD . /app
 WORKDIR /app
 RUN pip install -r requirements.txt
 RUN chmod a+x /app
-EXPOSE 3000
-CMD ["gunicorn", "--workers=3", "--threads=3", "-b 0.0.0.0:3000","app_main:core"]
+EXPOSE 4000
+CMD ["gunicorn", "--workers=3", "--threads=3", "-b 0.0.0.0:4000","app_main:core"]

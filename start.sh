@@ -1,1 +1,1 @@
-docker run --name="api.kbbi" --detach -p 3000:3000 api.kbbi.kemdikbud.go.id
+docker run --name="api.kbbi" --detach -p 4000:4000 api.kbbi.kemdikbud.go.id
