@@ -139,7 +139,7 @@ def app_info():
 
         error_request = soup.find(text="Terjadi Kesalahan")
         if error_request:
-            print('Error request word : %s | %s' % (word_req, iteration))
+            print("Error request word: %s | %s" % (word_req, iteration))
             sys.stdout.flush()
             num_auth += 1
             continue
