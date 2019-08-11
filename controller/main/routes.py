@@ -110,7 +110,7 @@ def app_info():
             print('All account limit')
             print('=' * 50)
             sys.stdout.flush()
-            return resp_err("All account limit", 3, 500)
+            return resp_err("All account kbbi limit", 3, 500)
 
         auth.update({"Posel": email})
         auth.update({"KataSandi": password})
