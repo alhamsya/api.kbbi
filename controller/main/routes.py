@@ -79,6 +79,7 @@ def app_info():
     iteration = 0
     sleep = 0
     auth = dict()
+
     # Validation request
     post_data = request.get_json()
     if not post_data:
@@ -116,8 +117,8 @@ def app_info():
         auth.update({"__RequestVerificationToken": token})
 
         try:
-            s.post('https://kbbi.kemdikbud.go.id/Account/Login', data=auth)
             # End auto login
+            s.post('https://kbbi.kemdikbud.go.id/Account/Login', data=auth)
 
             url_req = "https://kbbi.kemdikbud.go.id/entri/%s" % (word_req)
 
