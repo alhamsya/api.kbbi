@@ -40,7 +40,7 @@ def auth_email():
         # 'bot.alham16@hotmail.com',
         # 'bot.alham17@hotmail.com',
         # 'bot.alham18@hotmail.com',
-        'bot.alham19@hotmail.com',
+        # 'bot.alham19@hotmail.com',
         'bot.alham20@hotmail.com',
         'bot.alham21@hotmail.com',
         'bot.alham22@hotmail.com',
