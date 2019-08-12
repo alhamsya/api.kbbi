@@ -46,7 +46,7 @@ def auth_email():
         # 'bot.alham22@hotmail.com',
         # 'bot.alham23@hotmail.com',
         # 'bot.alham24@hotmail.com',
-        # 'bot.alham25@hotmail.com',
+        'bot.alham25@hotmail.com',
         "salmaabadriatu@gmail.com",
         "muklis321@gmail.com",
         "muklis1016@gmail.com",
