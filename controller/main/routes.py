@@ -151,6 +151,8 @@ def app_info():
                 "sts_word": False,
                 "word": word_req
             }
+            print("Berhasil - %s" % get_now())
+            sys.stdout.flush()
             return resp_success(result, "Word is not found")
 
         if not data_text and render_finish:
@@ -169,5 +171,6 @@ def app_info():
         "word": word_req,
         "meaning": all_meaning_word
     }
-
+    print("Berhasil - %s" % get_now())
+    sys.stdout.flush()
     return resp_success(result, "Word found in the KBBI")
