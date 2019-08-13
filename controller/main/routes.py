@@ -52,7 +52,7 @@ def auth_email():
         # "muklis1016@gmail.com",
         # "salmaasyafaah16@gmail.com",
         # "dwi.indira24@gmail.com",
-        "syafaahsalmaa03@gmail.com",
+        # "syafaahsalmaa03@gmail.com",
         # "hardifajri@gmail.com",
         "ajengrofifa142@gmail.com",
         "ocrnclrmdn30@gmail.com",
